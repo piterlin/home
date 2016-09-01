@@ -67,6 +67,8 @@ function onWindowResize() {
   updateSize();
   m_camera.aspect = window.innerWidth / window.innerHeight;
   m_camera.updateProjectionMatrix();
+  m_effect= new THREE.StereoEffect( m_renderer );
+//  m_effect.setSize( window.innerWidth, window.innerHeight )
   m_effect.setSize(window.innerWidth, window.innerHeight);
 }
 
@@ -117,8 +119,6 @@ function buildSkyBox(textureCube) {
     side: THREE.BackSide
   })
   var mesh = new THREE.Mesh(new THREE.BoxGeometry(100, 100, 100), material);
-
-
   return mesh;
 }
 
@@ -127,9 +127,9 @@ function buildSkyBox(textureCube) {
 <body style="padding: 0;">
 <script>
    init3D();
+    m_mcontrols = new THREE.DeviceOrientationControls( m_camera );
     m_effect= new THREE.StereoEffect( m_renderer );
     m_effect.setSize( window.innerWidth, window.innerHeight )
-    m_mcontrols = new THREE.DeviceOrientationControls( m_camera );
    initSky();
    animate();
 </script>
