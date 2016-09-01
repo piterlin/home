@@ -22,15 +22,8 @@
 </style>
 
 <script src="js/three.min.js"></script>
-<script src="js/stats.min.js"></script>
-<script src="js/OBJLoader.js"></script>
-<script src="js/MTLLoader.js"></script>
-    <script src="js/StereoEffect.js"></script>
-
-    <script src="js/DeviceOrientationControls.js"></script>
-
-<script type="text/javascript" src='js/jquery-1.12.3.min.js'></script>
-
+<script src="js/StereoEffect.js"></script>
+<script src="js/DeviceOrientationControls.js"></script>
 <script>
 
 var m_effect
@@ -78,14 +71,7 @@ function onWindowResize() {
 }
 
 
-$(document).ready(function () {
-   init3D();
-    m_effect= new THREE.StereoEffect( m_renderer );
-    m_effect.setSize( window.innerWidth, window.innerHeight )
-    m_mcontrols = new THREE.DeviceOrientationControls( m_camera );
-   initSky();
-   animate();
-});
+
 
 
 
@@ -139,6 +125,13 @@ function buildSkyBox(textureCube) {
 </script>
 </head>
 <body style="padding: 0;">
-
+<script>
+   init3D();
+    m_effect= new THREE.StereoEffect( m_renderer );
+    m_effect.setSize( window.innerWidth, window.innerHeight )
+    m_mcontrols = new THREE.DeviceOrientationControls( m_camera );
+   initSky();
+   animate();
+</script>
 </body>
 </html>
