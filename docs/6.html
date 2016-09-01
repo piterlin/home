@@ -31,9 +31,52 @@
 
 <script type="text/javascript" src='js/jquery-1.12.3.min.js'></script>
 
-
-<script src="js/jd_base4.js"></script>
 <script>
+
+var m_effect
+
+
+var m_mcontrols
+  /*
+   *主显区的长宽
+   * */
+var m_main_view_width, m_main_view_height;
+
+var m_container, m_camera, m_scene, m_renderer;
+
+/**
+ * 初始化显区尺寸
+ */
+
+function updateSize() {
+  m_main_view_width = window.innerWidth;
+  m_main_view_height = window.innerHeight;
+}
+function init3D() {
+  updateSize();
+  // m_container = $("#3d_content");
+  m_container = document.createElement('div');
+  document.body.appendChild(m_container);
+  m_camera = new THREE.PerspectiveCamera(75, m_main_view_width /m_main_view_height, 1, 1100);
+  m_scene = new THREE.Scene();
+  m_renderer = new THREE.WebGLRenderer({});
+  m_renderer.setPixelRatio(window.devicePixelRatio);
+  m_renderer.setSize(m_main_view_width, m_main_view_height);
+  m_container.appendChild(m_renderer.domElement);
+  window.addEventListener('resize', onWindowResize, false);
+}
+
+/**
+ * 窗口尺寸变化处理器
+ * */
+function onWindowResize() {
+  updateSize();
+  m_camera.aspect = window.innerWidth / window.innerHeight;
+  m_camera.updateProjectionMatrix();
+  m_effect.setSize(window.innerWidth, window.innerHeight);
+}
+
+
 $(document).ready(function () {
    init3D();
     m_effect= new THREE.StereoEffect( m_renderer );
@@ -41,20 +84,9 @@ $(document).ready(function () {
     m_mcontrols = new THREE.DeviceOrientationControls( m_camera );
    initSky();
    animate();
-  // enableParorama();
-  // buildSomeCube();
-//   initRayCaster();
-//   buildModel("./model/wardrobe.mtl","./model/wardrobe.obj",12.5, -7.8, 10.1);
-  //  switchModel();
-  //  switchModel();
-//   m_scene.add(buildPointLight(12.5, -2.8, 4.1));
-
 });
 
-function buildSomeCube(){
-    buildCube(1.5, -0.4, -0.6,windObjs);
-    m_scene.add(buildPointLight(1.5, -0.1, -0.6));
-}
+
 
 function animate() {
     requestAnimationFrame(animate);
@@ -62,12 +94,8 @@ function animate() {
 }
 
 function update() {
-//    paroramaUpdate();
-//    swing(windObjs);
-//    swing360(m_models);
-  //  m_renderer.render(m_scene, m_camera);
-    m_mcontrols.update();
     m_effect.render( m_scene, m_camera );
+    m_mcontrols.update();
 }
 function initSky(){
     var r3 = "texture/big_pic/";
@@ -81,47 +109,12 @@ function initSky(){
     m_skybox.push(skytexture3);
     m_scene.add(buildSkyBox(skytexture3))
 
-/*    var r = "texture/";
-    var urls = [
-        r + "2048_RT.png", r + "2048_LF.png",
-        r + "2048_UP.png", r + "2048_DN.png",
-        r + "2048_BK.png", r + "2048_RF.png"
-    ];
-    var skytexture=loadSkyTexture( urls);
-    skytexture.jd_name="jd1";
-    m_skybox.push(skytexture);
-
-    var r2 = "texture/small_pink/";
-    var urls2 = [
-        r2 + "1_RI.jpg", r2 + "1_LF.jpg",
-        r2 + "1_UP.jpg", r2 + "1_DN.jpg",
-        r2 + "1_BK.jpg", r2 + "1_FR.jpg"
-    ];
-    var skytexture2=loadSkyTexture( urls2)
-    skytexture2.jd_name="jd2";
-    m_skybox.push(skytexture2);
-
-    var r4 = "texture/big_pic2/";
-    var urls4 = [
-        r4 + "2048_RT.png", r4 + "2048_LF.png",
-        r4 + "2048_UP.png", r4 + "2048_DN.png",
-        r4 + "2048_BK.png", r4 + "2048_RF.png"
-    ];
-    var skytexture4=loadSkyTexture( urls4);
-    skytexture4.jd_name="jd4";
-    m_skybox.push(skytexture4);
-*/
-}
-function fulls(){
-    launchFullscreen(document.getElementById("3d_content"));
 }
 
-function changeRoomByBtn(roomName){
-    changeSkybox(roomName);
+function loadSkyTexture(urls) {
+  return new THREE.CubeTextureLoader().load(urls);
 }
-function toOtherPage(){
-    window.location.href="./2.html";
-}
+
 </script>
 </head>
 <body style="padding: 0;">

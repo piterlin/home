@@ -293,13 +293,10 @@ function init3D() {
   //   m_camera.position.set(0, 0, 5);
   m_scene = new THREE.Scene();
   //  m_scene.add(new THREE.AmbientLight(0x777777));
-  m_renderer = new THREE.WebGLRenderer({
-    antialias: true
-  });
+  m_renderer = new THREE.WebGLRenderer({});
   m_renderer.setPixelRatio(window.devicePixelRatio);
   m_renderer.setSize(m_main_view_width, m_main_view_height);
   m_container.appendChild(m_renderer.domElement);
-  m_renderer.sortObjects = false;
   //    m_renderer.receiveShadow = true;
   //    m_renderer.castShadow = true;
   //  m_renderer.setClearColor(0xffffff);
@@ -314,7 +311,7 @@ function onWindowResize() {
   m_camera.updateProjectionMatrix();
   // m_renderer.setSize( window.innerWidth, window.innerHeight );
   m_effect.setSize(window.innerWidth, window.innerHeight);
-  initSky();
+  //  initSky();
 }
 
 function loadSkyTexture(urls) {
