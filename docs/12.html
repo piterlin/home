@@ -3,6 +3,7 @@
 <head>
 <meta charset=utf-8>
 <meta name="x5-orientation" content="portrait">
+<meta name=”viewport” content=”width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0″/>
     <meta name="apple-mobile-web-app-capable" content="yes" /><!-- home screen app 全屏 -->
     <meta name="apple-mobile-web-app-status-bar-style" content="black" /><!-- 状态栏 -->
 <title>jd3x4</title>
@@ -66,9 +67,10 @@ function init3D() {
  * */
 function onWindowResize() {
   updateSize();
+  m_effect.setSize(window.innerWidth, window.innerHeight);
   m_camera.aspect = window.innerWidth / window.innerHeight;
   m_camera.updateProjectionMatrix();
-  m_effect.setSize(window.innerWidth, window.innerHeight);
+
 }
 
 
@@ -82,8 +84,9 @@ function animate() {
 }
 
 function update() {
+      m_mcontrols.update();
     m_effect.render( m_scene, m_camera );
-    m_mcontrols.update();
+
 }
 function initSky(){
     var r3 = "texture/big_pic/";
@@ -117,7 +120,7 @@ function buildSkyBox(textureCube) {
     depthWrite: false,
     side: THREE.BackSide
   })
-  var mesh = new THREE.Mesh(new THREE.BoxGeometry(100, 100, 100), material);
+  var mesh = new THREE.Mesh(new THREE.BoxGeometry(50, 50, 50), material);
   return mesh;
 }
 
@@ -126,10 +129,10 @@ function buildSkyBox(textureCube) {
 <body style="padding: 0;">
 <script>
    init3D();
-    m_mcontrols = new THREE.DeviceOrientationControls( m_camera );
-    m_effect= new THREE.StereoEffect( m_renderer );
-    m_effect.setSize( window.innerWidth, window.innerHeight )
    initSky();
+   m_effect= new THREE.StereoEffect( m_renderer );
+   m_effect.setSize( window.innerWidth, window.innerHeight )
+    m_mcontrols = new THREE.DeviceOrientationControls( m_camera );
    animate();
 </script>
 </body>
