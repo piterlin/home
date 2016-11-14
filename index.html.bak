@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="部战98大本营">
     <meta name="keyword" content="部落冲突，clan of clash,coc,部战98">
-    <title>部战98--部落冲突</title>
+    <title>部战98-部落冲突</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -60,9 +60,6 @@
 										<li>
 												<a  href="./guide.html">部战攻略</a>
 										</li>
-										<li>
-												<a  href="./topuser.html">荣誉长老</a>
-										</li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -83,6 +80,8 @@
 
         <!-- Title -->
         <!-- /.row -->
+
+        <hr>
 
         <!-- Footer -->
         <footer>
